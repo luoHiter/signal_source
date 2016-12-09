@@ -25,17 +25,6 @@ mode2= zeros(N_sample,N_code*fs/fd+1);
 mode3= zeros(N_sample,N_code*fs/fd+1);
 mode4= zeros(N_sample,N_code*fs/fd+1);
 mode5= zeros(N_sample,N_code*fs/fd+1);
-mode6= zeros(N_sample,N_code*fs/fd+1);
-mode7= zeros(N_sample,N_code*fs/fd+1);
-mode8= zeros(N_sample,N_code*fs/fd+1);
-mode9= zeros(N_sample,N_code*fs/fd+1);
-mode10= zeros(N_sample,N_code*fs/fd+1);
-mode11=zeros(N_sample,N_code*fs/fd+1);
-mode12=zeros(N_sample,N_code*fs/fd+1);
-mode13= zeros(N_sample,N_code*fs/fd+1);
-mode14= zeros(N_sample,N_code*fs/fd+1);
-
-
 datasets = cell(2,2);
 
 for snr = begin_snr:end_snr
@@ -51,39 +40,12 @@ for num_sample=1:N_sample
     y=lfm(Ac,fs,N,B);
     yr=awgn(y,snr,'measured','db');
     mode3(num_sample,:)=[3,yr];  
-    y=fsk2(N_code,fc,fs,fd,freqsep,Ac);
+    y=scc(Ac,fs,f0,f2,f1,fss,f00);
     yr=awgn(y,snr,'measured','db');
     mode4(num_sample,:)=[4,yr];    
-    y=fsk4(N_code,fc,fs,fd,freqsep,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode5(num_sample,:)=[5,yr];      
-    y=fsk8(N_code,fc,fs,fd,freqsep,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode6(num_sample,:)=[6,yr];     
-    y=psk2(N_code,fc,fs,fd,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode7(num_sample,:)=[7,yr]; 
-    y=psk4(N_code,fc,fs,fd,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode8(num_sample,:)=[8,yr];    
-    y=psk8(N_code,fc,fs,fd,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode9(num_sample,:)=[9,yr];  
-    y=qam16(N_code,fc,fs,fd,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode10(num_sample,:)=[10,yr];     
-    y=qam32(N_code,fc,fs,fd,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode11(num_sample,:)=[11,yr];     
-    y=qam64(N_code,fc,fs,fd,Ac);
-    yr=awgn(y,snr,'measured','db');
-    mode12(num_sample,:)=[12,yr];     
-    y=ofdm_psk4(N_code,fs,fd);
-    yr=awgn(y,snr,'measured','db');
-    mode13(num_sample,:)=[13,yr]; 
-    y=ofdm_qam4(N_code,fs,fd);
-    yr=awgn(y,snr,'measured','db');
-    mode14(num_sample,:)=[14,yr]; 
+    y=fsk4(fs,f0,f2,f1,fss,f00);
+    yr=jam_pulse(y,snr,'measured','db');
+    mode5(num_sample,:)=[5,yr];     
 end
 % sample_train=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:);mode6(1:N_train,:);mode7(1:N_train,:);mode8(1:N_train,:);mode9(1:N_train,:);mode10(1:N_train,:)];
 % sample_test=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:);mode6(N_train+1:end,:);mode7(N_train+1:end,:);mode8(N_train+1:end,:);mode9(N_train+1:end,:);mode10(N_train+1:end,:)];
@@ -97,8 +59,8 @@ else
     fdata = strcat('datasets', num2str(snr));
 end
 
-eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:);mode6(1:N_train,:);mode7(1:N_train,:);mode8(1:N_train,:);mode9(1:N_train,:);mode10(1:N_train,:);mode11(1:N_train,:);mode12(1:N_train,:);mode13(1:N_train,:);mode14(1:N_train,:)];'])
-eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:);mode6(N_train+1:end,:);mode7(N_train+1:end,:);mode8(N_train+1:end,:);mode9(N_train+1:end,:);mode10(N_train+1:end,:);mode11(N_train+1:end,:);mode12(N_train+1:end,:);mode13(N_train+1:end,:);mode14(N_train+1:end,:)];'])
+eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:)];'])
+eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:)];'])
 
 %eval(['save ',ftrain,' ',ftrain,';']);   %sample
 %eval(['save ',ftest,' ',ftest,';']);
