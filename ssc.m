@@ -1,5 +1,5 @@
 %入口参数:fs,f0,f2,f1,fss,f00
-function [signal]=ssc(Ac,Ns,Nsi,n,fs,f0)
+function [signal]=ssc(Ac,fs,fc)
 %fs=4e7;
 %f0=5e4;
 Ns=800;
@@ -29,13 +29,13 @@ end
 %扩频
 k_code=s.*w_code;
 %调制
-fs=8e9;
-f0=4e9;
+% fs=8e9;
+% fc=4e9;
 for i=1:length
     %Ac=2;
-    dt=fs/f0;
+    dt=fs/fc;
     t=0:dt/(n-1):dt;
-    cI=Ac*cos(2*pi*f0*t/fs);
+    cI=Ac*cos(2*pi*fc*t/fs);
     signal((1+(i-1)*8):i*8)=k_code((1+(i-1)*8):i*8).*cI;
 end
 

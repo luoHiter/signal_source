@@ -10,6 +10,7 @@ freqsep=1e6;
 df=25e5;
 dalpha=0.25e5;
 Ac=1;
+B=1e8;
 N_code=15;
 N=1500;
 N_sample=900;
@@ -17,7 +18,7 @@ N_sample_test=N_sample/3;
 N_train=N_sample-N_sample_test;
 
 begin_snr=0;
-end_snr=20;
+end_snr=1;
 kindnum_code=2;
 num_code=4;
 mode1= zeros(N_sample,N_code*fs/fd+1);
@@ -37,15 +38,16 @@ for num_sample=1:N_sample
     y=jam_zaidai(Ac,fs,N);
     yr=awgn(y,snr,'measured','db');
     mode2(num_sample,:)=[2,yr];  
-    y=lfm(Ac,fs,N,B);
+    y=lfm(Ac,fs,N);
     yr=awgn(y,snr,'measured','db');
     mode3(num_sample,:)=[3,yr];  
-    y=scc(Ac,fs,f0,f2,f1,fss,f00);
+    y=ssc(Ac,fs,fc);
+    y=y(1:N);
     yr=awgn(y,snr,'measured','db');
     mode4(num_sample,:)=[4,yr];    
-    y=fsk4(fs,f0,f2,f1,fss,f00);
-    yr=jam_pulse(y,snr,'measured','db');
-    mode5(num_sample,:)=[5,yr];     
+    %y=fsk4(fs,f0,f2,f1,fss,f00);
+    %yr=jam_pulse(y,snr,'measured','db');
+    %mode5(num_sample,:)=[5,yr];     
 end
 % sample_train=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:);mode6(1:N_train,:);mode7(1:N_train,:);mode8(1:N_train,:);mode9(1:N_train,:);mode10(1:N_train,:)];
 % sample_test=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:);mode6(N_train+1:end,:);mode7(N_train+1:end,:);mode8(N_train+1:end,:);mode9(N_train+1:end,:);mode10(N_train+1:end,:)];
@@ -59,8 +61,8 @@ else
     fdata = strcat('datasets', num2str(snr));
 end
 
-eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:)];'])
-eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:)];'])
+eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:)];'])%;mode5(1:N_train,:)
+eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:)];'])%;mode5(N_train+1:end,:)
 
 %eval(['save ',ftrain,' ',ftrain,';']);   %sample
 %eval(['save ',ftest,' ',ftest,';']);
