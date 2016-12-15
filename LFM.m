@@ -3,11 +3,12 @@ function [y]=lfm(Ac,fs,N)
     %T=1e-6;
     begin_fre=3e8;
     end_fre=8e8;
+    f0=begin_fre;
     dt=1/fs;
     B=begin_fre-end_fre;
     k=B/dt;
     t=linspace(0,dt,N);
-    y=exp(j*pi*k*t.^2);
+    y=exp(2*pi*f0*t+pi*k*t.^2);
     y=real(y);
 %     figure(1);
 %     plot(t,y,'LineWidth',1.5);

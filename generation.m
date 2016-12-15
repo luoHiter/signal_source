@@ -3,15 +3,14 @@ clear all;
 clc;
 tic
 
-fc=7e7;
-fs=2e8;
+fc=4e9;
+fs=6e9;
 fd=2e6;
 freqsep=1e6;
 df=25e5;
 dalpha=0.25e5;
 Ac=1;
 B=1e8;
-N_code=15;
 N=1500;
 N_sample=900;
 N_sample_test=N_sample/3;
@@ -21,11 +20,11 @@ begin_snr=0;
 end_snr=1;
 kindnum_code=2;
 num_code=4;
-mode1= zeros(N_sample,N_code*fs/fd+1);
-mode2= zeros(N_sample,N_code*fs/fd+1);
-mode3= zeros(N_sample,N_code*fs/fd+1);
-mode4= zeros(N_sample,N_code*fs/fd+1);
-mode5= zeros(N_sample,N_code*fs/fd+1);
+mode1= zeros(N_sample,N+1);
+mode2= zeros(N_sample,N+1);
+mode3= zeros(N_sample,N+1);
+mode4= zeros(N_sample,N+1);
+mode5= zeros(N_sample,N+1);
 datasets = cell(2,2);
 
 for snr = begin_snr:end_snr
