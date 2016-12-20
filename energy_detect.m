@@ -24,4 +24,3 @@ for i=1:10000
     end
     pd=N1/(N1+N2);
 end
-
