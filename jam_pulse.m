@@ -6,7 +6,6 @@ function [ur]=jam_pulse(Ac,fs,fc,N)
     n=15;
     b=randi(2,1,n)-1;
     N=N/n;
-    N
     ur=zeros(1,N);
     % ur=Ac*sin(2*pi*fc*t/fs).*square(2*pi*fp*t,5);
     for t=1:15
