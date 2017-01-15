@@ -44,9 +44,9 @@ for num_sample=1:N_sample
     y=y(1:N);
     yr=awgn(y,snr,'measured','db');
     mode4(num_sample,:)=[4,yr];    
-    %y=fsk4(fs,f0,f2,f1,fss,f00);
-    %yr=jam_pulse(y,snr,'measured','db');
-    %mode5(num_sample,:)=[5,yr];     
+    y=jam_pulse(Ac,fs,fc,N);
+    yr=awgn(y,snr,'measured','db');
+    mode5(num_sample,:)=[5,yr];     
 end
 % sample_train=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:);mode6(1:N_train,:);mode7(1:N_train,:);mode8(1:N_train,:);mode9(1:N_train,:);mode10(1:N_train,:)];
 % sample_test=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:);mode6(N_train+1:end,:);mode7(N_train+1:end,:);mode8(N_train+1:end,:);mode9(N_train+1:end,:);mode10(N_train+1:end,:)];
@@ -60,8 +60,8 @@ else
     fdata = strcat('datasets', num2str(snr));
 end
 
-eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:)];'])%;mode5(1:N_train,:)
-eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:)];'])%;mode5(N_train+1:end,:)
+eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:);]']);
+eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:);]']);
 
 %eval(['save ',ftrain,' ',ftrain,';']);   %sample
 %eval(['save ',ftest,' ',ftest,';']);
