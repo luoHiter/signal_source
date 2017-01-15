@@ -1,26 +1,47 @@
 clc;
 clear;
-A=sqrt(2);
-snr=0.1;
+tic;
 f0=3e9;
 fs=8e9;
-N=1024;
+N=1500;
 pf=0.01;
 %varn=A/snr;
-varn=20;
+varn=1;
 t=0:N-1;
 N1=0;N2=0;
-for i=1:10000
-    signal=A*sin(2*pi*f0*t/fs);
-    zaosheng=wgn(1,N,varn,'linear');
-    signal_noi=signal+zaosheng;
-    %plot(signal);
-    pow=sum(signal_noi.^2)/N;
-    lambda=varn*(N+sqrt(2*N)*qfuncinv(pf))/N;
-    if pow>lambda
-        N1=N1+1;
-    else
-        N2=N2+1;
+N_sample=900;
+begin_snr=-15;
+end_snr=10;
+
+signa1_noi_1= zeros(N_sample,N);
+signal_noi_2= zeros(N_sample,N);
+
+for snr = begin_snr:end_snr 
+    N1=0;
+    for i=1:N_sample
+        A=sqrt(2)*varn*10^(snr/20);
+        
+        %signal=A*sin(2*pi*f0*t/fs);
+        signal=LFM(A,fs,N);
+        zaosheng=wgn(1,N,varn,'linear');
+        signal_noi_1(i,:)=signal+zaosheng;
+
+        signal_noi_2(i,:)=wgn(1,N,varn,'linear'); 
     end
-    pd=N1/(N1+N2);
+
+    pow_1=sum(signal_noi_1.^2,2)/N;
+    pow_2=sum(signal_noi_2.^2,2)/N; 
+    lambda=varn*(N+sqrt(2*N)*qfuncinv(pf))/N;
+    for i=1:N_sample
+        if(pow_1(i)>lambda)
+            N1=N1+1;
+        end
+        if(pow_2(i)<lambda)
+            N1=N1+1;
+        end
+    end
+    pd=N1/(2*N_sample);
+    fprintf('current snr=%d\n',snr);
+    fprintf('   accuracy=%f\n',pd);
 end
+toc;
