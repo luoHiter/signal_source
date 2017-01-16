@@ -16,4 +16,7 @@ function [ur]=jam_pulse(Ac,fs,fc,N)
             ur(T)=0;
         end
     end
+end
 
+    
+   

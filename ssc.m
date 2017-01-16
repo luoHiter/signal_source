@@ -39,11 +39,17 @@ for i=1:length
     signal((1+(i-1)*8):i*8)=k_code((1+(i-1)*8):i*8).*cI;
 end
 
-%figure(1);
-%plot(signal(1:500));
-
-%figure(2)
-%signal=awgn(signal,10);
-%signal_fre=abs(fftshift(fft(signal,10240)));
-%plot(20*log10(signal_fre));
-%set(gca,'yscale','log'); 
+% figure(1);
+% plot(signal(1:500));
+% xlabel('时间（s）)')
+% ylabel('幅度（V）')
+% axis([0,500,-1.2,1.2]);
+% 
+% figure(2)
+% signal=awgn(signal,10);
+% signal_fre=abs(fftshift(fft(signal,10240)));
+% f=linspace(-fs/2,fs/2,10240);
+% plot(f,20*log10(signal_fre));
+% xlabel('频率（Hz）');
+% ylabel('幅度');
+% set(gca,'yscale','log'); 

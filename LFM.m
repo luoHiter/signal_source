@@ -1,4 +1,4 @@
-function [y]=lfm(Ac,fs,N)
+function [y]=LFM(Ac,fs,N)
     %fs=6e9;
     %T=1e-6;
     begin_fre=3e8;
@@ -8,7 +8,7 @@ function [y]=lfm(Ac,fs,N)
     B=begin_fre-end_fre;
     k=B/dt;
     t=linspace(0,dt,N);
-    y=exp(2*pi*f0*t+pi*k*t.^2);
+    y=Ac*exp(2*pi*f0*t+pi*k*t.^2);
     y=real(y);
 %     figure(1);
 %     plot(t,y,'LineWidth',1.5);
