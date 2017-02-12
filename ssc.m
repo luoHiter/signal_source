@@ -1,10 +1,10 @@
 %入口参数:fs,f0,f2,f1,fss,f00
-function [signal]=ssc(Ac,fs,fc)
+function [signal_final]=ssc(Ac,fs,fc,N)
 %fs=4e7;
 %f0=5e4;
 Ns=800;
 code_length=20;
-N=1:code_length;
+Nc=1:code_length;
 %rand('seed',0);
 x=sign(rand(1,code_length)-0.5);
 %ff=fs/f0;%单个码元采样点数
@@ -38,6 +38,7 @@ for i=1:length
     cI=Ac*cos(2*pi*fc*t/fs);
     signal((1+(i-1)*8):i*8)=k_code((1+(i-1)*8):i*8).*cI;
 end
+signal_final=signal(1:N);
 
 % figure(1);
 % plot(signal(1:500));
