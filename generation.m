@@ -101,8 +101,8 @@ else
     fdata = strcat('datasets', num2str(snr));
 end
 
-eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:);]']);
-eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:);]']);
+eval([ftrain,'=[mode1(1:N_train,:);mode2(1:N_train,:);mode3(1:N_train,:);mode4(1:N_train,:);mode5(1:N_train,:);mode6(1:N_train,:);mode7(1:N_train,:);mode8(1:N_train,:);mode9(1:N_train,:);mode10(1:N_train,:);mode11(1:N_train,:);mode12(1:N_train,:);mode13(1:N_train,:);mode14(1:N_train,:);mode15(1:N_train,:);];']);
+eval([ftest,'=[mode1(N_train+1:end,:);mode2(N_train+1:end,:);mode3(N_train+1:end,:);mode4(N_train+1:end,:);mode5(N_train+1:end,:);mode6(N_train+1:end,:);mode7(N_train+1:end,:);mode8(N_train+1:end,:);mode9(N_train+1:end,:);mode10(N_train+1:end,:);mode11(N_train+1:end,:);mode12(N_train+1:end,:);mode13(N_train+1:end,:);mode14(N_train+1:end,:);mode15(N_train+1:end,:);];']);
 
 %eval(['save ',ftrain,' ',ftrain,';']);   %sample
 %eval(['save ',ftest,' ',ftest,';']);
