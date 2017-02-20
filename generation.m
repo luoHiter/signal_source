@@ -4,7 +4,7 @@ clc;
 tic
 
 fc=4e9;
-fs=6e9;
+fs=8e9;
 fd=2e6;
 freqsep=1e6;
 df=25e5;
