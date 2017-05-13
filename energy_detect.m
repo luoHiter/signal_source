@@ -9,11 +9,11 @@ pf=0.01;
 varn=1;
 t=0:N-1;
 N1=0;N2=0;
-N_sample=900;
+N_sample=10000;
 
-begin_N=1024;
-end_N=4096;
-dN=1024;
+begin_N=1500;
+end_N=4500;
+dN=1000;
 begin_snr=-18;
 end_snr=0;
 
@@ -53,21 +53,21 @@ for N=begin_N:dN:end_N
         fprintf('current snr=%d\n',snr);
         fprintf('   accuracy=%f\n',pd);
     end
-    if N==1024
+    if N==1500
         plot(k,pdd,':or');
         hold on;
-    elseif N==2048
+    elseif N==2500
         plot(k,pdd,':dm');
         hold on;
-    elseif N==3072
+    elseif N==3500
         plot(k,pdd,':hb');
         hold on;
-    elseif N==4096
+    elseif N==4500
         plot(k,pdd,':.k');
         hold on;
     end         
 end
-legend('N=1024','N=2048','N=3072','N=4096'); 
+legend('N=1500','N=2500','N=3500','N=4500'); 
 ylabel('Pd');
 xlabel('SNR/dB');
 title('能量检测算法不同情况下检测概率');

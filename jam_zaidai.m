@@ -7,7 +7,7 @@ function [yt]=jam_zaidai(Ac,fs,N)
     f=(fs/2:df:fs);
     order=6;
 
-    d = fdesign.bandpass('Fst1,Fp1,Fp2,Fst2,Ast1,Ap,Ast2',1/4,3/8,5/8,7/8,60,1,60);
+    d = fdesign.bandpass('Fst1,Fp1,Fp2,Fst2,Ast1,Ap,Ast2',23/50,24/50,25/50,26/50,60,1,60);
     hd=design(d,'equiripple');
 
 
