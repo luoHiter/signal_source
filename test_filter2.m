@@ -1,7 +1,7 @@
 clc;
 clear;
 Ac=1;
-fs=12e9;
+fs=13e9;
 N=1024;
 
 fc=3.354e9;
@@ -18,8 +18,8 @@ figure(1);
 subplot(211);plot(t,xr);
 subplot(212);hua_fft(xr,fs,1);
 % y=filter(bz1,az1,x);
-f1=2e9;
-f3=5e9;
+f1=3e9;
+f3=6e9;
 step=50;
 fstep=(f3-f1)/step;
 
@@ -59,6 +59,11 @@ for i=1:step
     en_f(i)=f1+(tempj+0.5)*fstep2;
     f1=f1+fstep;
 end
-find(en>max(en)/10)
+fprintf('N=%d',N);
+
+k=find(en>max(en)/10);
+f=en_f(k);
+figure(2);
+plot(en_f,en);
 end
     
