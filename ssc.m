@@ -3,7 +3,7 @@ function [signal_final]=ssc(Ac,fs,fc,N)
 %fs=4e7;
 %f0=5e4;
 Ns=800;
-code_length=20;
+code_length=200;
 Nc=1:code_length;
 %rand('seed',0);
 x=sign(rand(1,code_length)-0.5);
