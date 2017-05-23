@@ -9,7 +9,7 @@ Nc=1:code_length;
 x=sign(rand(1,code_length)-0.5);
 %ff=fs/f0;%单个码元采样点数
 %for i=1:code_length
-%    s((1+(i-1)*ff):i*ff)=x(i);
+%    s((1+(i-1)*ff):i*ff)=x(i); 
 %end 
 for i=1:code_length
     s((1+(i-1)*Ns):i*Ns)=x(i);
