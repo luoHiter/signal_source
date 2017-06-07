@@ -12,4 +12,5 @@ function y=bpsk(N_code,fc,fs,fd,Ac)
              y((j-1)*nsamp+i)=Ac*cos(2*pi*fc*(i-1)/fs+pi);
             end     
         end
+    end
 end
