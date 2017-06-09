@@ -4,8 +4,8 @@ clc;
 tic
 
 fc=4e9;
-fs=8e9;
-fd=2e6;
+fs=12e9;
+fd=12e7;
 freqsep=1e6;
 df=25e5;
 dalpha=0.25e5;
@@ -16,8 +16,8 @@ N_sample=900;
 N_sample_test=N_sample/3;
 N_train=N_sample-N_sample_test;
 
-begin_snr=-15;
-end_snr=5;
+begin_snr=-5;
+end_snr=15;
 kindnum_code=2;
 num_code=4;
 mode1= zeros(N_sample,N+1);
@@ -28,6 +28,10 @@ mode5= zeros(N_sample,N+1);
 mode6= zeros(N_sample,N+1);
 datasets = cell(2,2);
 
+d = fdesign.bandpass('Fst1,Fp1,Fp2,Fst2,Ast1,Ap,Ast2',21/40,22/40,24/40,25/40,60,1,60);%窄带信号所用滤波器
+%d = fdesign.bandpass('Fst1,Fp1,Fp2,Fst2,Ast1,Ap,Ast2',5/16,3/8,5/8,11/16,60,1,60);
+hd=design(d,'equiripple');
+
 for snr = begin_snr:end_snr
 for num_sample=1:N_sample    
     fprintf('current snr=%d,',snr);
@@ -35,7 +39,7 @@ for num_sample=1:N_sample
     y=audio(Ac,fs,N);
     yr=awgn(y,snr,'measured','db');
     mode1(num_sample,:)=[1,yr];   
-    y=jam_zaidai(Ac,fs,N);
+    y=jam_zaidai(Ac,fs,N,hd);
     yr=awgn(y,snr,'measured','db');
     mode2(num_sample,:)=[2,yr];  
     y=LFM(Ac,fs,N);
@@ -89,5 +93,5 @@ train_x = datasets{1,1};
 train_y = datasets{1,2};
 test_x = datasets{2,1};
 test_y = datasets{2,2};
-save('test','train_x','train_y','test_x','test_y','-v7.3')
+save('test_-5-15_5_900','train_x','train_y','test_x','test_y','-v7.3')
 toc
