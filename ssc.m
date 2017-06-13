@@ -54,3 +54,7 @@ signal_final=signal(1:N);
 % xlabel('频率（Hz）');
 % ylabel('幅度');
 % set(gca,'yscale','log'); 
+
+subplot(211);plot(signal_final);grid on;xlabel('时间');ylabel('幅度');
+axis([1,600,-1.5,1.5]);
+subplot(212);hua_fft(signal_final,fs,1);grid on;
