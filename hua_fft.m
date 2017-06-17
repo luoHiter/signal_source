@@ -16,7 +16,7 @@ y_f=fs*(0:nfft/2-1)/nfft; %变换后对应的频率的序列
 if style==1
     if nargin==3
         plot(y_f,2*abs(y_ft(1:nfft/2))/length(y));%matlab的帮助里画FFT的方法
-        %ylabel('幅值');xlabel('频率');title('信号幅值谱');
+        ylabel('幅值');xlabel('频率（Hz）');
         %plot(y_f,abs(y_ft(1:nfft/2)));%论坛上画FFT的方法
     else
         f1=varargin{1};
