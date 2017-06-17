@@ -28,9 +28,9 @@ for N=1500:1500:6000
     ylabel('幅度')
     subplot(212);hua_fft(xr,fs,1);grid on;
     % y=filter(bz1,az1,x);
-    f1=3e9;
+    f1=1e9;
     f3=5e9;
-    step=60;
+    step=50;
     fstep=(f3-f1)/step;
 
     for i=0:step-1
@@ -76,7 +76,9 @@ for N=1500:1500:6000
     f=en_f(k);
     figure(N/1500+1);
     plot(en_f,en,'o-');
-    line([3e9,5e9],[max(en)/10,max(en)/10],'linestyle','--','color','r');
+    
+    
+    line([1e9,5e9],[max(en)/10,max(en)/10],'linestyle','--','color','r');
     xlabel('频率（Hz）)')
     ylabel('能量值')
     grid on;

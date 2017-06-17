@@ -6,22 +6,22 @@ N=1500;
 
 fd=12e7;
 fc=3e9;
-fc1=4e9;
-fc2=5e9;
+fc1=3e9;
+fc2=3e9;
 % f1=2e9;
 % f3=5e9;
 step=50;
 snr=0;
 Jsr=20;
 %fstep=(f3-f1)/step;
-d = fdesign.bandpass('Fst1,Fp1,Fp2,Fst2,Ast1,Ap,Ast2',23/50,24/50,26/50,27/50,60,1,60);
-hd=design(d,'equiripple');
+%d = fdesign.bandpass('Fst1,Fp1,Fp2,Fst2,Ast1,Ap,Ast2',118/240,119/240,121/240,122/240,60,1,60);
+%hd=design(d,'equiripple');
 for N=1500:1500:6000
     t=1:N;
-    x=jam_pulse(Ac,fs,fc2,N);
+    %x=jam_pulse(Ac,fs,fc2,N);
     N_code=N/100;
     %x=jam_zaidai(Ac,fs,N,hd);
-    %x=sin(2*pi*fc1/fs*t);
+    x=sin(2*pi*fc1/fs*t);
     Pjar=sum(x.^2)/N;
     As=2*Pjar*10^(-Jsr/20);
     signal=bpsk(N_code,fc,fs,fd,As);
@@ -44,8 +44,8 @@ for N=1500:1500:6000
     %plot(y_f,abs(y2));
 
 
-    f1=3e9;
-    f3=5e9;
+    f1=2.950e9;
+    f3=3.050e9;
     fstep=(f3-f1)/step;
     for i=0:step-1
         y=bandp(xr,f1+i*fstep,f1+(i+1)*fstep,f1+(i-0.5)*fstep,f1+(i+1.5)*fstep,0.1,30,fs);
